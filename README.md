@@ -1,2 +1,2 @@
-# ros-sim-gazebo-rccar
-The gazebo simulation for RC Car
+# auturbo_aucar
+AuCAR
