@@ -1,0 +1,40 @@
+aucar:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+  # Position Controllers ---------------------------------------
+  l_r_position_controller:
+    type: position_controllers/JointPositionController
+    joint: l_r_steer
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  r_r_position_controller:
+    type: position_controllers/JointPositionController
+    joint: r_r_steer
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  l_f_position_controller:
+    type: position_controllers/JointPositionController
+    joint: l_f_steer
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  r_f_position_controller:
+    type: position_controllers/JointPositionController
+    joint: r_f_steer
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+  l_r_velocity_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: l_r_drive
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  r_r_velocity_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: r_r_drive
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  l_f_velocity_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: l_f_drive
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  r_f_velocity_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: r_f_drive
+    pid: {p: 100.0, i: 0.01, d: 10.0}
