@@ -10,7 +10,9 @@ add_compile_options(-std=c++11)
 # Find catkin packages and libraries for catkin and system dependencies
 ################################################################################
 find_package(catkin REQUIRED COMPONENTS
+    gazebo REQUIRED
     roscpp
+    tf
 )
 
 ################################################################################
@@ -29,7 +31,10 @@ find_package(catkin REQUIRED COMPONENTS
 # Declare catkin specific configuration to be passed to dependent projects
 ################################################################################
 catkin_package(
-  CATKIN_DEPENDS roscpp
+  INCLUDE_DIRS include
+  LIBRARIES gazebo_ros_utils
+  CATKIN_DEPENDS roscpp tf 
+  DEPENDS SDF gazebo
 )
 
 ################################################################################
@@ -38,8 +43,27 @@ catkin_package(
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
+  ${GAZEBO_INCLUDE_DIRS}
 )
+#add_executable(aucar_drive src/aucar_drive.cpp)
+link_directories(${GAZEBO_LIBRARY_DIRS})
+list(APPEND CMAKE_CXX_FLAGS "${GAZEBO_CXX_FLAGS}")
+add_library(aucar_drive SHARED src/aucar_drive.cpp)
+target_link_libraries(aucar_drive ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})
 
+
+
+
+#include_directories(${GAZEBO_INCLUDE_DIRS})
+#link_directories(${GAZEBO_LIBRARY_DIRS})
+#list(APPEND CMAKE_CXX_FLAGS "${GAZEBO_CXX_FLAGS}")
+#add_library(aucar_drive SHARED src/aucar_drive.cpp)
+#target_link_libraries(aucar_drive ${GAZEBO_LIBRARIES})
+
+#include_directories(
+#  include
+#  ${catkin_INCLUDE_DIRS}
+#)
 #add_dependencies(aucar_gazebo ${catkin_EXPORTED_TARGETS})
 #target_link_libraries(aucar_gazebo ${catkin_LIBRARIES})
 

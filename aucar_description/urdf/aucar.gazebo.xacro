@@ -1,25 +1,25 @@
 <?xml version="1.0"?>
 <robot name="aucar" xmlns:xacro="http://ros.org/wiki/xacro">
   <!-- <xacro:arg name="laser_visual" default="false"/>
-  <xacro:arg name="imu_visual"   default="false"/>
+  <xacro:arg name="imu_visual"   default="false"/> -->
 
   <gazebo reference="base_link">
     <material>Gazebo/DarkGrey</material>
   </gazebo>
 
-  <gazebo reference="l_r_bracket">
+  <gazebo reference="steer_left_front_link">
     <material>Gazebo/Blue</material>
   </gazebo>
 
-  <gazebo reference="r_r_bracket">
+  <gazebo reference="steer_right_front_link">
     <material>Gazebo/Blue</material>
   </gazebo>
 
-  <gazebo reference="l_f_bracket">
+  <gazebo reference="steer_left_rear_link">
     <material>Gazebo/Blue</material>
   </gazebo>
 
-  <gazebo reference="r_f_bracket">
+  <gazebo reference="steer_right_rear_link">
     <material>Gazebo/Blue</material>
   </gazebo>
 
@@ -65,7 +65,7 @@
     <maxVel>0.1</maxVel>
     <fdir1>1 0 0</fdir1>
     <material>Gazebo/FlatBlack</material>
-  </gazebo> -->
+  </gazebo>
 
 
 
@@ -77,26 +77,33 @@
     <material>Gazebo/Grey</material>
   </gazebo> -->
 
-  <!-- <gazebo>
-    <plugin name="aucar_controller" filename="libgazebo_ros_diff_drive.so">
-      <commandTopic>cmd_vel</commandTopic>
+  <gazebo>
+    <!-- <plugin name="aucar_controller" filename="libgazebo_ros_diff_drive.so"> -->
+      <plugin name="aucar_controller" filename="libaucar_drive.so">
+      <!-- <robotNamespace>aucar1</robotNamespace> -->
+      <commandVelocityTopic>cmd_vel</commandVelocityTopic>
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
       <robotBaseFrame>base_footprint</robotBaseFrame>
-      <publishWheelTF>false</publishWheelTF>
-      <publishTf>true</publishTf>
-      <publishWheelJointState>true</publishWheelJointState>
-      <legacyMode>false</legacyMode>
+      <baseLinkName>base_link</baseLinkName>
+      <steerLeftFrontJoint>steer_left_front_joint</steerLeftFrontJoint>
+      <steerRightFrontJoint>steer_right_front_joint</steerRightFrontJoint>
+      <steerLeftRearJoint>steer_left_rear_joint</steerLeftRearJoint>
+      <steerRightRearJoint>steer_right_rear_joint</steerRightRearJoint>
+      <wheelLeftFrontJoint>wheel_left_front_joint</wheelLeftFrontJoint>
+      <wheelRightFrontJoint>wheel_right_front_joint</wheelRightFrontJoint>
+      <wheelLeftRearJoint>wheel_left_rear_joint</wheelLeftRearJoint>
+      <wheelRightRearJoint>wheel_right_rear_joint</wheelRightRearJoint>
+      <doesPublishOdometry>true</doesPublishOdometry>
+      <doesPublishWheelTF>false</doesPublishWheelTF>
+      <doesPublishWheelJointState>true</doesPublishWheelJointState>
       <updateRate>30</updateRate>
-      <leftJoint>wheel_left_joint</leftJoint>
-      <rightJoint>wheel_right_joint</rightJoint>
       <wheelSeparation>0.500</wheelSeparation>
       <wheelDiameter>0.196</wheelDiameter>
       <wheelAcceleration>100</wheelAcceleration>
       <wheelTorque>20</wheelTorque>
-      <rosDebugLevel>na</rosDebugLevel>
     </plugin>
-  </gazebo> -->
+  </gazebo>
 
   <!-- <gazebo>
     <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
